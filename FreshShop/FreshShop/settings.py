@@ -25,7 +25,7 @@ SECRET_KEY = 'np8zq7$r_b#_(=o31s=(^06-xrm#zffr!%8$rgft2kr)q5^)z*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']   # 配置允许访问的主机
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Store',        # 添加应用APP
 ]
 
 MIDDLEWARE = [
@@ -118,3 +119,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR,'static')  # 当前静态文件的路径(主要用于收集静态文件)
+STATICFILES__DIRS = (
+    os.path.join(BASE_DIR,'static'),
+)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'static')
+
