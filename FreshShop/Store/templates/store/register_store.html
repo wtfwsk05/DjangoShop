@@ -1,0 +1,103 @@
+{#{% extends 'store/base.html' %}#}
+{##}
+{#{% block title %}店铺注册{% endblock %}#}
+{#{% block BlankPage %}店铺注册{% endblock %}#}
+{##}
+{##}
+{#{% block content %}#}
+{#    <form class="form" method="post" enctype="multipart/form-data">#}
+{#        <div class="form-group">#}
+{#            {% csrf_token %}#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#            <!--placeholder 占位符     form-control 圆弧整行   form-control-user 特效-->#}
+{#            <input class="form-control form-control-user" placeholder="店铺名称" type="text" name="store_name">#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#            <!--placeholder 占位符     form-control 圆弧整行   form-control-user 特效-->#}
+{#            <input class="form-control form-control-user" placeholder="店铺地址" type="text" name="store_address">#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#            <!--placeholder 占位符     form-control 圆弧整行   form-control-user 特效-->#}
+{#            <input class="form-control form-control-user" placeholder="店铺描述" type="text" name="store_descrition">#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#            <!--placeholder 占位符     form-control 圆弧整行   form-control-user 特效-->#}
+{#            <input class="form-control form-control-user" placeholder="店铺电话" type="text" name="store_phone">#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#            <!--placeholder 占位符     form-control 圆弧整行   form-control-user 特效-->#}
+{#            <input class="form-control form-control-user" placeholder="店铺注册资金" type="text" name="store_money">#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#            <!--placeholder 占位符     form-control 圆弧整行   form-control-user 特效-->#}
+{#            <input class="form-control form-control-user" placeholder="店铺类型" type="text" name="type">#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#            <!--placeholder 占位符     form-control 圆弧整行   form-control-user 特效-->#}
+{#            <input class="form-control form-control-user" placeholder="店铺logo" type="file" name="store_logo">#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#            <!--placeholder 占位符     btn 按钮父类样式  btn-primary圆弧蓝色  btn-block整行-->#}
+{#            <input class="btn btn-primary btn-block" placeholder="注册" type="submit">#}
+{#        </div>#}
+{#    </form>#}
+{#{% endblock %}#}
+{##}
+
+
+{% extends "store/base.html" %}
+
+{% block title %}
+    店铺注册
+{% endblock %}
+
+{% block content %}
+    <form class="form" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            {% csrf_token %}
+        </div>
+        <div class="form-group">
+            <input class="form-control form-control-user" placeholder="店铺名称" type="text" name="store_name">
+        </div>
+        <div class="form-group">
+            <input class="form-control form-control-user" placeholder="店铺地址" type="text" name="store_address">
+        </div>
+        <div class="form-group">
+            <input class="form-control form-control-user" placeholder="店铺描述" type="text" name="store_descrition">
+
+        </div>
+        <div class="form-group">
+            <input class="form-control form-control-user" placeholder="店铺电话" type="text" name="store_phone">
+        </div>
+        <div class="form-group">
+            <input class="form-control form-control-user" placeholder="店铺注册资金" type="text" name="store_money">
+        </div>
+        <div class="form-group">
+            <select name="type" class="form-control form-control-user" multiple="multiple">
+                {% for t in type_list %}
+                <option value="{{ t.id }}">{{ t.store_type }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <input class="form-control form-control-user" placeholder="店铺logo" type="file" name="store_logo">
+        </div>
+        <div>
+            <input class="btn btn-primary btn-block" type="submit" value="注册">
+        </div>
+
+    </form>
+{% endblock %}
+
+
+
+
+<!--TypeError: int() argument must be a string, a bytes-like object or a number, not 'NoneType'-->
+<!-- user_id = int(request.COOKIES.get("user_id")) -->
+<!--原因：没有进行登录-->
+
+
+
+
+

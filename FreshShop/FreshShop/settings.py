@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Store',        # 添加应用APP
+    'ckeditor',
+    'ckeditor_uploader'
 ]
 
 MIDDLEWARE = [
@@ -120,10 +122,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR,'static')  # 当前静态文件的路径(主要用于收集静态文件)
-STATICFILES__DIRS = (
+
+STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'static'),
 )
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'static')
 
+CKEDITOR_UPLOAD_PATH = 'static/upload'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
