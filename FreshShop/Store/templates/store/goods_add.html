@@ -1,7 +1,7 @@
 {% extends 'store/base.html' %}
 
 {% block title %}添加商品{% endblock %}
-{% block BlankPage %}添加商品{% endblock %}
+{% block label %}添加商品{% endblock %}
 
 {% block content %}
     <form class="form" method="post" enctype="multipart/form-data">
@@ -33,6 +33,15 @@
         <div class="form-group">    <!--隐藏区,指定当前页的店铺id为1-->
             <input class="form-control form-control-user" type="hidden" placeholder="店铺" name="goods_store" value="1"> <!--{{ request.COOKIES.has_store }}-->
         </div>
+        <div class="form-group">
+            <select class="form-control form-control-user" name="goods_type">
+                <!--placeholder 占位符     form-control 圆弧整行   form-control-user 特效-->
+                {% for goods_type in goodstype_list %}
+                    <option value="{{ goods_type.id }}">{{ goods_type.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
         <div class="form-group">
             <!--placeholder 占位符     form-control 圆弧整行   form-control-user 特效  涉及图片和文件时typy=file-->
             <input class="form-control form-control-user" placeholder="商品图片" type="file" name="goods_image">

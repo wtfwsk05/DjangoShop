@@ -196,6 +196,7 @@ def register_store(request):
 @loginValid
 def goods_add(request):
     '''添加商品'''
+    goodstype_list = GoodsType.objects.all()    # 获取所有商品类型(修改)
     if request.method == 'POST':
     # 获取poss请求中相关参数
         goods_name = request.POST.get('goods_name') # 商品名称
@@ -207,6 +208,7 @@ def goods_add(request):
         goods_store = request.POST.get('goods_store')   # 商铺
     # 图片或文件字段使用request.POST.get('goods_image') 无法上传图片或文件,需修改为FILES
         goods_image = request.FILES.get('goods_image')
+        goods_type = request.POST.get('goods_type')
     # 获取的数据保存到数据库
         goods = Goods()   # 商品类对象
         goods.goods_name = goods_name
@@ -217,12 +219,13 @@ def goods_add(request):
         goods.goods_safeDate = goods_safeDate
         goods.goods_store = goods_store
         goods.goods_image = goods_image
+        goods.goods_type = GoodsType.objects.get(id = int(goods_type))
         goods.save()    # 保存数据
     # 保存多对多数据
         # store_id 是goods模型中的关联字段
         goods.store_id.add(Store.objects.get(id=int(goods_store)))
         goods.save()
-    return render(request,'store/goods_add.html')
+    return render(request,'store/goods_add.html',locals())
 
 # 商品列表
 from django.core.paginator import Paginator # 导入分页器类
@@ -265,7 +268,7 @@ def goods_list(request,state):
     page = paginator.page(int(page_num))
     page_range = paginator.page_range
     # 返回分页数据
-    return render(request, "store/goods_list.html", {"page": page, "page_range": page_range, "keywords": keywords})
+    return render(request, "store/goods_list.html", {"page": page, "page_range": page_range, "keywords": keywords,'state':state})
 
 
 # def goods(request,goods_id):
@@ -327,4 +330,23 @@ def set_goods(request,state):
             goods.save()
     # 重定向(重新访问指定页面)
     return HttpResponseRedirect(referer)
+
+@loginValid
+# 商品类型
+def list_goodstype(request):
+    goodstypelist = GoodsType.objects.all()
+    if request.method == 'POST':
+        # 获取数据
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        picture = request.FILES.get('picture')
+        # 存储数据
+        goodstype = GoodsType() # 创建对象
+        goodstype.name = name
+        goodstype.description = description
+        goodstype.picture = picture
+        goodstype.save()
+        return HttpResponseRedirect('/store/list_goodstype')
+    return render(request,'store/list_goodstype.html',locals())
+
 

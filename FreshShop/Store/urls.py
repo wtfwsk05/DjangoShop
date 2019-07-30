@@ -5,6 +5,7 @@ urlpatterns = [
 # 配置注册页面的路由
     path('register/', register),
     path('register_store/', register_store),
+    path('list_goodstype/', list_goodstype),
     path('goods_add/', goods_add),
     re_path(r'goods_list/(?P<state>\w+)', goods_list),
     # path('goods_under/', goods_under),
